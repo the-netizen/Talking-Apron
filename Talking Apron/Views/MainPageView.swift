@@ -35,23 +35,24 @@ struct MainPageView: View {
                 } // vstack
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                            Image(currentPersona.imageName)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50)
-                                .aspectRatio(contentMode: .fit)
+                        Image(currentPersona.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50)
+                            .aspectRatio(contentMode: .fit)
+                            .buttonStyle(.plain)
+                        
                     }
-                    .sharedBackgroundVisibility(.hidden)
-
+//                    .content.sharedBackgroundVisibility(.hidden)
                     ToolbarItem(placement: .topBarTrailing) {
                         Menu {
                             //menu items
                             Button("Home") {
-                                
+
                             }
                             Button("Recipe") {
                             }
-                            
+
                             Button("Saved") {
                             }
                         } label: {
@@ -59,9 +60,10 @@ struct MainPageView: View {
                                 .font(.title2)
                                 .foregroundStyle(.primary)
                         }
+                        .menuStyle(.borderlessButton)
                     }
-                    .sharedBackgroundVisibility(.hidden)
-                }// toolbar
+                } // toolbar
+                .toolbarBackground(.hidden, for: .navigationBar)
             } //zstack
         } //nav
     } //body
