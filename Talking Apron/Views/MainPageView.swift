@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MainPageView: View {
     @State private var currentPersona: Persona = Persona.allPersonas.first!
+    @State private var showMenuItems = false
 
     var body: some View {
         NavigationStack {
@@ -33,39 +34,58 @@ struct MainPageView: View {
 
                     Spacer()
                 } // vstack
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
+                
+                //Custom toolbar
+                VStack {
+                    HStack {
                         Image(currentPersona.imageName)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 50)
-                            .aspectRatio(contentMode: .fit)
-                            .buttonStyle(.plain)
+                            .padding(.leading, 20)
+//                                                Text("Talking Apron")
+//                                                    .font(.headline)
+//                                                    .foregroundColor(.chocolate)
                         
-                    }
-//                    .content.sharedBackgroundVisibility(.hidden)
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Menu {
-                            //menu items
-                            Button("Home") {
-
-                            }
-                            Button("Recipe") {
-                            }
-
-                            Button("Saved") {
+                        Spacer()
+                        
+                        // menu button
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                showMenuItems.toggle()
                             }
                         } label: {
                             Image(systemName: "line.3.horizontal")
-                                .font(.title2)
-                                .foregroundStyle(.primary)
+                                .font(.title)
+                                .foregroundColor(.primary)
                         }
-                        .menuStyle(.borderlessButton)
+                        .padding(.trailing, 16)
                     }
-                } // toolbar
-                .toolbarBackground(.hidden, for: .navigationBar)
-            } //zstack
+                    .padding(.top, 8)
+                    .frame(height: 60)
+                    
+                    Spacer()
+                }
+                if showMenuItems {
+                   MenuItemView(
+                       isPresented: $showMenuItems,
+                       onHomeSelected: {
+                           // Navigate to home
+                       },
+                       onRecipeSelected: {
+                           // Navigate to recipe
+                       },
+                       onSavedSelected: {
+                           // Navigate to saved
+                       }
+                   )
+                   .transition(.opacity)
+                   .zIndex(100)  // Ensure it appears on top
+               }
+                
+            } //vstack
         } //nav
+        .navigationBarHidden(true)
     } //body
 }
 
