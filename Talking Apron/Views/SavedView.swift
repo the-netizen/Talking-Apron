@@ -1,13 +1,13 @@
 //
-//  RecipeMainView.swift
+//  SavedView.swift
 //  Talking Apron
 //
-//  Created by Naima Khan on 15/01/2026.
+//  Created by Naima Khan on 21/02/2026.
 //
 
 import SwiftUI
 
-struct RecipeView: View {
+struct SavedView: View {
     @State private var showMenuItems = false
     @State private var showRecipePage = false
     @State private var showSaved = false
@@ -21,13 +21,13 @@ struct RecipeView: View {
             
             VStack {
                 Spacer()
-                Text("Recipe View")
+                Text("Bookmarked Recipes")
                     .font(.largeTitle)
                     .foregroundColor(.chocolate)
-                
                 Spacer()
             }
             
+            //Navigation toolbar
             NavigationToolbar(
                 showMenuItems: $showMenuItems,
                 showRecipePage: $showRecipePage,
@@ -41,12 +41,12 @@ struct RecipeView: View {
                 dismiss()
             }
         }
-        .navigationDestination(isPresented: $showSaved) {
-            SavedView()
+        .navigationDestination(isPresented: $showRecipePage) {
+            RecipeView()
         }
     }
 }
 
 #Preview {
-    RecipeView()
+    SavedView()
 }
