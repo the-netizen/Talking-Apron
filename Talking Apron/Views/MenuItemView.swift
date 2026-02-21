@@ -19,9 +19,7 @@ struct MenuItemView: View {
                 .contentShape(Rectangle())
                 .ignoresSafeArea()
                 .onTapGesture {
-                    withAnimation {
                         isPresented = false
-                    }
                 } //dissmiss menu items when clicked outside its box
             
             VStack {
@@ -79,7 +77,6 @@ struct MenuItemView: View {
     }
 }
 
-// Custom menu button component
 struct MenuItemButton: View {
     let icon: String
     let title: String
@@ -102,7 +99,7 @@ struct MenuItemButton: View {
                 Spacer()
             }
             .padding(.horizontal, 20)
-            .padding(.vertical, 14)
+            .padding(.vertical, 15)
             .frame(width: 200)
             .background(backgroundColor)
             .cornerRadius(30)
